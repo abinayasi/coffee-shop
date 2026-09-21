@@ -1,0 +1,989 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bean Bliss Coffee Shop</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8f0;
+            color: #3e2723;
+        }
+
+        /* NAVBAR */
+
+        header {
+            background: #3e2723;
+            padding: 18px 8%;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        nav h1 {
+            color: white;
+            font-size: 28px;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            color: #d7a86e;
+        }
+
+
+        /* HOME */
+
+        .home {
+            min-height: 600px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            text-align: center;
+
+            background:
+            linear-gradient(
+                rgba(0,0,0,0.65),
+                rgba(0,0,0,0.65)
+            ),
+            url("images/coffee.jpg");
+
+            background-size: cover;
+            background-position: center;
+        }
+
+        .home-content {
+            color: white;
+            max-width: 700px;
+            padding: 30px;
+        }
+
+        .home-content h2 {
+            font-size: 55px;
+            margin-bottom: 20px;
+        }
+
+        .home-content p {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 30px;
+        }
+
+        .home-btn {
+            display: inline-block;
+
+            background: #c08552;
+            color: white;
+
+            padding: 15px 32px;
+
+            border-radius: 6px;
+
+            text-decoration: none;
+
+            font-size: 17px;
+        }
+
+        .home-btn:hover {
+            background: #8d5a3b;
+        }
+
+
+        /* COMMON SECTION */
+
+        section {
+            padding: 80px 8%;
+            text-align: center;
+        }
+
+        section h2 {
+            font-size: 38px;
+            margin-bottom: 45px;
+        }
+
+
+        /* MENU */
+
+        .menu-container {
+
+            display: grid;
+
+            grid-template-columns:
+            repeat(auto-fit, minmax(250px, 1fr));
+
+            gap: 30px;
+
+            max-width: 1100px;
+
+            margin: auto;
+        }
+
+        .card {
+
+            background: white;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            box-shadow:
+            0 5px 20px rgba(0,0,0,0.12);
+
+            transition: 0.3s;
+
+            padding-bottom: 25px;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+        }
+
+        .card img {
+
+            width: 100%;
+
+            height: 200px;
+
+            object-fit: cover;
+        }
+
+        .card h3 {
+
+            font-size: 24px;
+
+            margin-top: 20px;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+
+            color: #666;
+
+            padding: 0 20px;
+
+            line-height: 1.5;
+        }
+
+        .price {
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #8d5a3b;
+
+            margin: 15px;
+        }
+
+        .order-btn {
+
+            background: #3e2723;
+
+            color: white;
+
+            border: none;
+
+            padding: 12px 25px;
+
+            border-radius: 5px;
+
+            cursor: pointer;
+
+            font-size: 15px;
+        }
+
+        .order-btn:hover {
+
+            background: #8d5a3b;
+        }
+
+
+        /* CART */
+
+        #cart {
+
+            background: #f1e2d0;
+        }
+
+        .cart-box {
+
+            max-width: 700px;
+
+            margin: auto;
+
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 12px;
+
+            box-shadow:
+            0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .cart-item {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            padding: 15px;
+
+            border-bottom: 1px solid #ddd;
+        }
+
+        .cart-item-name {
+
+            font-weight: bold;
+
+            font-size: 17px;
+        }
+
+        .remove-btn {
+
+            background: #b71c1c;
+
+            color: white;
+
+            border: none;
+
+            padding: 7px 12px;
+
+            border-radius: 4px;
+
+            cursor: pointer;
+        }
+
+        .remove-btn:hover {
+
+            background: #7f0000;
+        }
+
+        .total {
+
+            font-size: 25px;
+
+            font-weight: bold;
+
+            margin-top: 25px;
+
+            color: #3e2723;
+        }
+
+        .checkout-btn {
+
+            margin-top: 20px;
+
+            background: #6d4c41;
+
+            color: white;
+
+            border: none;
+
+            padding: 14px 30px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 17px;
+        }
+
+        .checkout-btn:hover {
+
+            background: #3e2723;
+        }
+
+
+        /* ABOUT */
+
+        .about {
+
+            background: #ead7c3;
+        }
+
+        .about p {
+
+            max-width: 750px;
+
+            margin: auto;
+
+            font-size: 18px;
+
+            line-height: 1.8;
+        }
+
+
+        /* CONTACT */
+
+        .contact-form {
+
+            max-width: 550px;
+
+            margin: auto;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+
+            width: 100%;
+
+            padding: 15px;
+
+            margin-bottom: 15px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 6px;
+
+            font-size: 16px;
+        }
+
+        .contact-form textarea {
+
+            height: 130px;
+
+            resize: none;
+        }
+
+        .submit-btn {
+
+            background: #3e2723;
+
+            color: white;
+
+            border: none;
+
+            padding: 14px 30px;
+
+            border-radius: 6px;
+
+            cursor: pointer;
+
+            font-size: 16px;
+        }
+
+        .submit-btn:hover {
+
+            background: #8d5a3b;
+        }
+
+
+        /* FOOTER */
+
+        footer {
+
+            background: #3e2723;
+
+            color: white;
+
+            text-align: center;
+
+            padding: 25px;
+
+            line-height: 1.8;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 768px) {
+
+            nav {
+
+                flex-direction: column;
+
+                gap: 15px;
+            }
+
+            nav ul {
+
+                gap: 12px;
+
+                flex-wrap: wrap;
+
+                justify-content: center;
+            }
+
+            .home-content h2 {
+
+                font-size: 38px;
+            }
+
+            .home-content p {
+
+                font-size: 17px;
+            }
+
+            .cart-item {
+
+                gap: 10px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <nav>
+
+        <h1>☕ Bean Bliss</h1>
+
+        <ul>
+
+            <li>
+                <a href="#home">Home</a>
+            </li>
+
+            <li>
+                <a href="#menu">Menu</a>
+            </li>
+
+            <li>
+                <a href="#cart">
+                    🛒 Cart (<span id="cart-count">0</span>)
+                </a>
+            </li>
+
+            <li>
+                <a href="#about">About</a>
+            </li>
+
+            <li>
+                <a href="#contact">Contact</a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HOME ================= -->
+
+<section class="home" id="home">
+
+    <div class="home-content">
+
+        <h2>
+            Fresh Coffee,
+            Happy Moments ☕
+        </h2>
+
+        <p>
+
+            Welcome to Bean Bliss Coffee Shop.
+
+            Enjoy freshly brewed coffee,
+            delicious snacks and a peaceful
+            atmosphere.
+
+        </p>
+
+        <a href="#menu" class="home-btn">
+
+            Explore Menu
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= MENU ================= -->
+
+<section id="menu">
+
+    <h2>Our Menu</h2>
+
+    <div class="menu-container">
+
+
+        <!-- ESPRESSO -->
+
+        <div class="card">
+
+            <img
+                src="images/coffee.jpg"
+                alt="Espresso Coffee"
+            >
+
+            <h3>Espresso</h3>
+
+            <p>
+                Strong and rich coffee made
+                from freshly roasted beans.
+            </p>
+
+            <div class="price">
+                ₹120
+            </div>
+
+            <button
+                class="order-btn"
+                onclick="addToCart('Espresso', 120)">
+
+                Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- CAPPUCCINO -->
+
+        <div class="card">
+
+            <img
+                src="images/cappuccino.jpg"
+                alt="Cappuccino"
+            >
+
+            <h3>Cappuccino</h3>
+
+            <p>
+                Smooth coffee topped with
+                creamy milk foam.
+            </p>
+
+            <div class="price">
+                ₹150
+            </div>
+
+            <button
+                class="order-btn"
+                onclick="addToCart('Cappuccino', 150)">
+
+                Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- COLD COFFEE -->
+
+        <div class="card">
+
+            <img
+                src="images/coldcoffee.jpg"
+                alt="Cold Coffee"
+            >
+
+            <h3>Cold Coffee</h3>
+
+            <p>
+                Chilled and refreshing coffee
+                perfect for a hot day.
+            </p>
+
+            <div class="price">
+                ₹140
+            </div>
+
+            <button
+                class="order-btn"
+                onclick="addToCart('Cold Coffee', 140)">
+
+                Add to Cart
+
+            </button>
+
+        </div>
+
+
+        <!-- CHOCOLATE CAKE -->
+
+        <div class="card">
+
+            <img
+                src="images/cake.jpg"
+                alt="Chocolate Cake"
+            >
+
+            <h3>Chocolate Cake</h3>
+
+            <p>
+                Soft and delicious chocolate
+                cake with rich flavor.
+            </p>
+
+            <div class="price">
+                ₹180
+            </div>
+
+            <button
+                class="order-btn"
+                onclick="addToCart('Chocolate Cake', 180)">
+
+                Add to Cart
+
+            </button>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- ================= CART ================= -->
+
+<section id="cart">
+
+    <h2>🛒 Your Cart</h2>
+
+    <div class="cart-box">
+
+        <div id="cart-items">
+
+            <p>
+                Your cart is empty.
+            </p>
+
+        </div>
+
+
+        <div class="total">
+
+            Total: ₹<span id="total">0</span>
+
+        </div>
+
+
+        <button
+            class="checkout-btn"
+            onclick="checkout()">
+
+            Checkout
+
+        </button>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section class="about" id="about">
+
+    <h2>About Us</h2>
+
+    <p>
+
+        Bean Bliss is a cozy coffee shop
+        created for coffee lovers.
+
+        We serve freshly brewed coffee,
+        tasty snacks and delicious desserts.
+
+        Our goal is to provide great taste,
+        friendly service and a relaxing
+        environment for everyone.
+
+    </p>
+
+</section>
+
+
+<!-- ================= CONTACT ================= -->
+
+<section id="contact">
+
+    <h2>Contact Us</h2>
+
+    <div class="contact-form">
+
+        <form onsubmit="sendMessage(event)">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Your Name"
+                required
+            >
+
+            <input
+                type="email"
+                placeholder="Your Email"
+                required
+            >
+
+            <input
+                type="tel"
+                placeholder="Your Phone Number"
+                required
+            >
+
+            <textarea
+                placeholder="Your Message"
+                required>
+            </textarea>
+
+            <button
+                type="submit"
+                class="submit-btn">
+
+                Send Message
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <p>
+        © 2026 Bean Bliss Coffee Shop
+    </p>
+
+    <p>
+        Made with ❤️ and ☕
+    </p>
+
+</footer>
+
+
+<!-- ================= JAVASCRIPT ================= -->
+
+<script>
+
+    let cart = [];
+
+    let total = 0;
+
+
+    /* ADD TO CART */
+
+    function addToCart(name, price) {
+
+        cart.push({
+
+            name: name,
+
+            price: price
+
+        });
+
+        total = total + price;
+
+        updateCart();
+
+        alert(name + " added to cart! ☕");
+
+    }
+
+
+    /* UPDATE CART */
+
+    function updateCart() {
+
+        let cartItems =
+            document.getElementById("cart-items");
+
+        let cartCount =
+            document.getElementById("cart-count");
+
+        let totalElement =
+            document.getElementById("total");
+
+
+        cartCount.innerText =
+            cart.length;
+
+
+        totalElement.innerText =
+            total;
+
+
+        cartItems.innerHTML = "";
+
+
+        if (cart.length === 0) {
+
+            cartItems.innerHTML =
+                "<p>Your cart is empty.</p>";
+
+            return;
+
+        }
+
+
+        cart.forEach(function(item, index) {
+
+            let div =
+                document.createElement("div");
+
+            div.className =
+                "cart-item";
+
+
+            div.innerHTML = `
+
+                <span class="cart-item-name">
+
+                    ${item.name}
+                    - ₹${item.price}
+
+                </span>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeItem(${index})">
+
+                    Remove
+
+                </button>
+
+            `;
+
+
+            cartItems.appendChild(div);
+
+        });
+
+    }
+
+
+    /* REMOVE ITEM */
+
+    function removeItem(index) {
+
+        total =
+            total - cart[index].price;
+
+
+        cart.splice(index, 1);
+
+
+        updateCart();
+
+    }
+
+
+    /* CHECKOUT */
+
+    function checkout() {
+
+        if (cart.length === 0) {
+
+            alert(
+                "Your cart is empty! Please add an item."
+            );
+
+            return;
+
+        }
+
+
+        alert(
+
+            "🎉 Order placed successfully!\n\n" +
+
+            "Total Amount: ₹" +
+
+            total +
+
+            "\n\nThank you for ordering from Bean Bliss ☕"
+
+        );
+
+
+        cart = [];
+
+        total = 0;
+
+
+        updateCart();
+
+    }
+
+
+    /* CONTACT FORM */
+
+    function sendMessage(event) {
+
+        event.preventDefault();
+
+
+        let name =
+            document.getElementById("name").value;
+
+
+        alert(
+
+            "Thank you " +
+            name +
+            "! Your message has been sent. 😊"
+
+        );
+
+
+        event.target.reset();
+
+    }
+
+</script>
+
+
+</body>
+
+</html>
+```
